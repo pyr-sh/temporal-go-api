@@ -8,6 +8,11 @@ proto: grpc grpc-mock goimports copyright
 
 # Update submodule and compile proto files.
 update-proto: update-proto-submodule proto update-dependencies gomodtidy
+
+hack:
+	find . -type f -name '*.pb.go' -exec sed -i -E 's/go.temporal.io\/api\/dependencies\/gogoproto/github.com\/gogo\/protobuf\/gogoproto/g' {} \;
+	find . -type f -name '*.pb.go' -exec go fmt {} \;
+
 ########################################################################
 
 ##### Variables ######
